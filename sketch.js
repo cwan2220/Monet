@@ -11,6 +11,7 @@ let c1, c2;
 let noiseDetailVal = 1; // Add noiseDetailVal.
 var a = 0.0, x, y, n, step = 3;
 let skyColor1, skyColor2;
+let riverColor;
 
 // Initialization function: Set canvas and initial state.
 function setup() {
@@ -64,8 +65,26 @@ function changeColors() {
     // Set random color of sky.
     skyColor1 = color(random(255), random(255), random(255));
     skyColor2 = color(random(255), random(255), random(255));
-    
+    // Set random color of river.
+    let newRiverColor = color((red(skyColor1) + red(skyColor2)) / 2, 
+                              (green(skyColor1) + green(skyColor2)) / 2, 
+                              (blue(skyColor1) + blue(skyColor2)) / 2);  // The sky colors as the river color.
+
+    for (let i = 0; i < num; i++) {
+        R[i] = red(newRiverColor);
+        G[i] = green(newRiverColor);
+        B[i] = blue(newRiverColor);
+    }
   }
+
+// Function that drawing river.
+function river(){
+    for (let i = 0; i < num; i++) {
+        fill(riverColor);  // Use colors of new river.
+        vecLocation[i].add(vecVelocity[i]);
+        ellipse(vecLocation[i].x, vecLocation[i].y, 30, 2);
+    }
+ }
 
 // Function that drawing castle.
 function castle(){
@@ -189,6 +208,7 @@ function getColorForHeight(y) {
       return lerpColor(skyColor2, skyColor1, (y - h * (7/8)) / (h * (1/8)));
     }
   }
+
 
 // Function that drawing mountain height by using nosieSeed.
 function init() {
