@@ -12,6 +12,7 @@ let noiseDetailVal = 1; // Add noiseDetailVal.
 var a = 0.0, x, y, n, step = 3;
 let skyColor1, skyColor2;
 let riverColor;
+let castleColor1;
 
 // Initialization function: Set canvas and initial state.
 function setup() {
@@ -65,6 +66,8 @@ function changeColors() {
     // Set random color of sky.
     skyColor1 = color(random(255), random(255), random(255));
     skyColor2 = color(random(255), random(255), random(255));
+    // Set random color of castle.
+    castleColor1 = color(random(255), random(255), random(255));
     // Set random color of river.
     let newRiverColor = color((red(skyColor1) + red(skyColor2)) / 2, 
                               (green(skyColor1) + green(skyColor2)) / 2, 
@@ -89,7 +92,7 @@ function river(){
 // Function that drawing castle.
 function castle(){
     //castle bottom
-    fill(92,61,43); // Use new colors.
+    fill(castleColor1); // Use new colors.
     triangle(40,320,80,320,80,260);
     triangle(180,300,180,320,200,320);
     triangle(350,320,200,220,220,320);
